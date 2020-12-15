@@ -1,0 +1,4 @@
+include 'lignin-core'
+include 'lignin-examples'
+
+rootProject.name = 'lignin'

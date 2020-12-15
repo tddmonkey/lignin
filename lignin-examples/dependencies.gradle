@@ -1,0 +1,10 @@
+dependencies {
+    project(":lignin-core")
+
+    compile(
+        "io.projectreactor.kotlin:reactor-kotlin-extensions:1.1.1",
+        "com.michael-bull.kotlin-result:kotlin-result:1.1.9"
+    )
+
+
+}

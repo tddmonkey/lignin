@@ -1,0 +1,30 @@
+apply plugin: 'kotlin'
+
+project.ext {
+	jvmVersion = 11
+}
+
+[compileKotlin, compileTestKotlin]*.kotlinOptions {
+    jvmTarget = project.jvmVersion
+}
+
+sourceCompatibility = project.jvmVersion
+targetCompatibility = project.jvmVersion
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+[compileJava, compileTestJava]*.options*.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+	compile(
+		"org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+	)
+
+//	testCompile(
+//		"org.spockframework:spock-core:$spockVersion",
+//	)
+}
+
