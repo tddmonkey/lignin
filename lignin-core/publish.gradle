@@ -1,0 +1,61 @@
+//apply plugin: 'com.bmuschko.nexus'
+apply plugin: 'de.marcphilipp.nexus-publish'
+apply plugin: 'signing'
+
+signing {
+    sign publishing.publications
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from(components.java)
+
+            pom {
+                name = 'Lignin Core'
+                description = 'A set of Project Reactor Kotlin extensions'
+                url = 'http://github.com/tddmonkey/lignin'
+
+                developers {
+                    developer {
+                        id = 'tddmonkey'
+                        name = 'Colin Vipurs'
+                    }
+                }
+
+                licenses {
+                    license {
+                        name = 'MIT'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/tddmonkey/lignin.git'
+                    developerConnection = 'scm:git:ssh://github.com/tddmonkey/lignin.git'
+                    url = 'http://github.com/tddmonkey/lignin'
+                }
+            }
+        }
+    }
+}
+
+nexusPublishing {
+    repositories {
+        sonatype()
+    }
+}
+
+nexusStaging {
+    username = System.getenv("SONATYPE_USERNAME")
+    password = System.getenv("SONATYPE_PASSWORD")
+    stagingProfileId = "668f8e4994cfc1"
+}
+
+afterEvaluate {
+    rootProject.closeRepository.dependsOn publishToSonatype
+}
