@@ -1,1 +1,2 @@
 apply from: 'dependencies.gradle'
+apply from: 'publish.gradle'

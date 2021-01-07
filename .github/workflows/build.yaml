@@ -15,5 +15,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
             java-version: 11
-      - name: Build With Gradle
-        run: ./gradlew build
+      - name: Build & Publish
+        run: ./gradlew publish
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
